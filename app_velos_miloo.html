@@ -1,0 +1,1082 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Miloo - Fiches vendeur vélos</title>
+  <link rel="icon" href="data:,">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17201b;
+      --muted: #5c6760;
+      --line: #d9ded8;
+      --panel: #ffffff;
+      --page: #f5f6f2;
+      --brand: #1d6f5f;
+      --brand-dark: #124f45;
+      --accent: #c7482d;
+      --gold: #b28a35;
+      --blue: #245d8f;
+      --shadow: 0 14px 34px rgba(23, 32, 27, .11);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      min-width: 320px;
+    }
+
+    button, a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(245, 246, 242, .94);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+
+    .topbar {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 12px 18px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .brandline {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .logo {
+      width: 46px;
+      height: 46px;
+      border-radius: 8px;
+      background: var(--ink);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 850;
+      letter-spacing: 0;
+      flex: 0 0 auto;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.15rem, 1.8vw, 1.75rem);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .search {
+      min-width: min(32vw, 360px);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      padding: 11px 12px;
+      font-size: 1rem;
+      color: var(--ink);
+      outline: none;
+    }
+
+    .search:focus {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px rgba(29, 111, 95, .14);
+    }
+
+    main {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 18px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 18px;
+    }
+
+    .rail {
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    .visual {
+      overflow: hidden;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #dfe5dc;
+      min-height: 102px;
+    }
+
+    .visual img {
+      display: block;
+      width: 100%;
+      height: 116px;
+      object-fit: cover;
+    }
+
+    .family-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .family-button {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      min-height: 76px;
+      text-align: left;
+      padding: 12px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+      cursor: pointer;
+      color: var(--ink);
+    }
+
+    .family-button:hover,
+    .family-button.active {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px rgba(29, 111, 95, .12);
+    }
+
+    .family-button.active {
+      background: #eef6f1;
+    }
+
+    .family-name {
+      display: block;
+      font-size: 1rem;
+      font-weight: 780;
+      line-height: 1.1;
+    }
+
+    .family-use {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: .82rem;
+      line-height: 1.2;
+    }
+
+    .speed-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: end;
+      gap: 5px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      border-radius: 999px;
+      padding: 5px 8px;
+      background: #e8ece7;
+      color: #2e3732;
+      font-size: .78rem;
+      font-weight: 760;
+      white-space: nowrap;
+    }
+
+    .detail {
+      display: grid;
+      gap: 14px;
+      align-content: start;
+      min-width: 0;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: stretch;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .eyebrow {
+      margin: 0 0 7px;
+      color: var(--brand-dark);
+      font-size: .83rem;
+      font-weight: 820;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(1.85rem, 4vw, 3.6rem);
+      line-height: .95;
+      letter-spacing: 0;
+    }
+
+    .hero-copy {
+      margin: 12px 0 0;
+      max-width: 70ch;
+      color: #324039;
+      font-size: clamp(1rem, 1.4vw, 1.18rem);
+      line-height: 1.45;
+    }
+
+    .pricebox {
+      min-width: 220px;
+      border-left: 1px solid var(--line);
+      padding-left: 18px;
+      display: grid;
+      gap: 10px;
+      align-content: center;
+    }
+
+    .price {
+      font-size: clamp(1.5rem, 2.5vw, 2.35rem);
+      line-height: 1;
+      font-weight: 880;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .tax {
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    .variant-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .variant-tab {
+      min-height: 46px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      padding: 10px 14px;
+      font-size: 1rem;
+      font-weight: 780;
+      cursor: pointer;
+    }
+
+    .variant-tab.active {
+      background: var(--brand);
+      border-color: var(--brand);
+      color: #fff;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, .95fr);
+      gap: 14px;
+      align-items: start;
+    }
+
+    .section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      min-width: 0;
+    }
+
+    .section h3 {
+      margin: 0 0 12px;
+      font-size: 1.05rem;
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    .pitch-list,
+    .option-list,
+    .pdf-list {
+      display: grid;
+      gap: 9px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .pitch-list li,
+    .option-list li {
+      position: relative;
+      padding-left: 18px;
+      line-height: 1.38;
+      color: #2c3832;
+    }
+
+    .pitch-list li::before,
+    .option-list li::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--gold);
+      position: absolute;
+      left: 0;
+      top: .55em;
+    }
+
+    .specs {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .spec {
+      min-height: 82px;
+      border: 1px solid #e1e5df;
+      border-radius: 8px;
+      padding: 11px;
+      background: #fbfcfa;
+    }
+
+    .spec-label {
+      display: block;
+      color: var(--muted);
+      font-size: .78rem;
+      font-weight: 760;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .spec-value {
+      display: block;
+      margin-top: 6px;
+      font-size: 1rem;
+      line-height: 1.24;
+      font-weight: 740;
+      overflow-wrap: anywhere;
+    }
+
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .94rem;
+    }
+
+    .compare-table th,
+    .compare-table td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px 8px;
+      text-align: left;
+      vertical-align: top;
+      line-height: 1.32;
+    }
+
+    .compare-table th {
+      color: var(--muted);
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .pdf-list a {
+      min-height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 12px;
+      color: var(--brand-dark);
+      background: #fbfcfa;
+      text-decoration: none;
+      font-weight: 760;
+    }
+
+    .pdf-list a:hover {
+      border-color: var(--brand);
+      background: #eef6f1;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 12px;
+    }
+
+    .tag {
+      display: inline-flex;
+      min-height: 30px;
+      align-items: center;
+      border-radius: 999px;
+      background: #ecf0ed;
+      color: #34413a;
+      padding: 6px 10px;
+      font-size: .83rem;
+      font-weight: 720;
+    }
+
+    .source-note {
+      margin: 0;
+      color: var(--muted);
+      font-size: .86rem;
+      line-height: 1.35;
+    }
+
+    @media (max-width: 1080px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+
+      .rail {
+        position: static;
+      }
+
+      .family-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .visual {
+        display: none;
+      }
+    }
+
+    @media (max-width: 820px) {
+      .topbar {
+        grid-template-columns: 1fr;
+      }
+
+      .actions,
+      .search {
+        width: 100%;
+        min-width: 0;
+      }
+
+      main {
+        padding: 12px;
+      }
+
+      .family-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero,
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pricebox {
+        border-left: 0;
+        border-top: 1px solid var(--line);
+        padding-left: 0;
+        padding-top: 14px;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .family-grid,
+      .specs {
+        grid-template-columns: 1fr;
+      }
+
+      .family-button {
+        min-height: 68px;
+      }
+
+      .compare-table {
+        font-size: .86rem;
+      }
+
+      .compare-table th,
+      .compare-table td {
+        padding: 9px 5px;
+      }
+    }
+
+    @media print {
+      header, .rail, .variant-tabs { display: none; }
+      main, .content-grid, .hero { display: block; padding: 0; }
+      .section, .hero { box-shadow: none; break-inside: avoid; margin-bottom: 12px; }
+      body { background: #fff; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="topbar">
+        <div class="brandline">
+          <div class="logo" aria-hidden="true">M</div>
+          <div>
+            <h1>Fiches vendeur Miloo</h1>
+            <p class="subtitle">7 familles, variantes 25/45 km/h, arguments, specs, accessoires et PDF sources.</p>
+          </div>
+        </div>
+        <div class="actions">
+          <input class="search" id="search" type="search" placeholder="Rechercher usage, spec, prix..." autocomplete="off">
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <aside class="rail" aria-label="Choix du vélo">
+        <div class="visual">
+          <img src="ChatGPT Image Jun 3, 2026, 11_31_10 AM.png" alt="">
+        </div>
+        <nav class="family-grid" id="familyGrid"></nav>
+      </aside>
+
+      <section class="detail" aria-live="polite">
+        <div class="hero">
+          <div>
+            <p class="eyebrow" id="category"></p>
+            <h2 id="title"></h2>
+            <p class="hero-copy" id="description"></p>
+            <div class="tag-row" id="tags"></div>
+          </div>
+          <div class="pricebox">
+            <div>
+              <div class="price" id="price"></div>
+              <div class="tax">Prix TVA incluse, selon brochure disponible</div>
+            </div>
+            <div class="variant-tabs" id="variantTabs"></div>
+          </div>
+        </div>
+
+        <div class="content-grid">
+          <div class="section">
+            <h3>Pitch client</h3>
+            <ul class="pitch-list" id="pitch"></ul>
+          </div>
+
+          <div class="section">
+            <h3>Specs clés</h3>
+            <div class="specs" id="specs"></div>
+          </div>
+
+          <div class="section">
+            <h3>Comparer 25 vs 45</h3>
+            <div id="compare"></div>
+          </div>
+
+          <div class="section">
+            <h3>Options/accessoires</h3>
+            <ul class="option-list" id="options"></ul>
+          </div>
+
+          <div class="section">
+            <h3>PDF</h3>
+            <ul class="pdf-list" id="pdfs"></ul>
+          </div>
+
+          <div class="section">
+            <h3>Notes vendeur</h3>
+            <p class="source-note" id="notes"></p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const bikes = [
+      {
+        id: "mighty",
+        name: "Mighty Beast",
+        category: "Fat bike urbain puissant",
+        use: "Rails de tram, ville exigeante, style affirmé",
+        description: "Fat bike électrique stable et confortable, pensé pour dominer les irrégularités urbaines avec des pneus larges et une forte présence visuelle.",
+        tags: ["Fat bike", "Bafang", "Pneus 26 x 4", "Samsung"],
+        pitches: [
+          "Rassure immédiatement sur les rails de tram grâce aux pneus larges de 4 pouces.",
+          "Positionnement idéal pour un client qui veut de la puissance, du confort et un vélo qui se remarque.",
+          "La version 45 ajoute double batterie, clignotants, boost et rétroviseurs pour les trajets rapides."
+        ],
+        variants: {
+          "25": {
+            label: "25 km/h",
+            price: "CHF 2'999",
+            motor: "Bafang 500 W nominal, 950 W pointe, 85 Nm",
+            battery: "48 V x 14 Ah, 672 Wh, amovible, Samsung",
+            range: "Non précisée dans la brochure 25; batterie 672 Wh",
+            brakes: "Disques hydrauliques, huile minérale, double pistons",
+            wheels: "26 x 4 Kenda tout terrain; option 26 x 3.5 ville",
+            transmission: "Shimano 7 vitesses",
+            load: "Non précisé",
+            options: ["Pneus ville 26 x 3.5", "Selle Ezone ou Respiro", "Tige NCX Suntour", "Tige télescopique"],
+            pdfs: [{ label: "Brochure Mighty 25", href: "brochures/brochure_mighty_25_fr.pdf" }]
+          },
+          "45": {
+            label: "45 km/h",
+            price: "CHF 5'999",
+            motor: "Bafang 750 W nominal, 1'250 W pointe, 85 Nm",
+            battery: "Cadre 672 Wh + batterie arrière 672 Wh, Samsung",
+            range: "30-50 km par batterie; 60-100 km avec double batterie",
+            brakes: "Tektro hydrauliques, huile minérale, double pistons",
+            wheels: "26 x 4 Kenda tout terrain; option 26 x 3.5 ville",
+            transmission: "SRAM 8 vitesses, capteur de pédalage",
+            load: "Non précisé",
+            options: ["Double batterie", "Clignotants", "Boost", "Rétroviseurs", "Pneus ville", "Tige NCX ou télescopique"],
+            pdfs: [{ label: "Brochure Mighty 45", href: "brochures/brochure_mighty45_FR_compressed.pdf" }]
+          }
+        },
+        notes: "Garantie 2 ans et premier service après 400 km indiqués sur les brochures Mighty."
+      },
+      {
+        id: "classy",
+        name: "Classy Beast",
+        category: "Confort urbain stable",
+        use: "Ville, confort, porte-bagage, rails de tram",
+        description: "Vélo maniable, précis et confortable. Ses pneus larges protègent des irrégularités du terrain et réduisent le risque de coincer les roues dans les rails.",
+        tags: ["Urbain", "Confort", "Porte-bagage", "Bafang"],
+        pitches: [
+          "Très bon choix pour un client urbain qui veut un vélo stable sans look fat bike extrême.",
+          "Les porte-bagages optionnels ouvrent un usage quotidien: sac, courses, équipement ou petit transport.",
+          "En 45 km/h, il devient une alternative de pendulaire avec autonomie extensible par deuxième batterie."
+        ],
+        variants: {
+          "25": {
+            label: "25 km/h",
+            price: "CHF 3'500",
+            motor: "Bafang 500 W nominal, 950 W pointe, 85 Nm",
+            battery: "48 V x 14 Ah, 672 Wh, amovible, Samsung",
+            range: "Jusqu'a 80 km selon manuel Classy 25",
+            brakes: "Disques hydrauliques, huile minérale, double pistons",
+            wheels: "27.5 x 3 Kenda ville",
+            transmission: "Shimano 7 vitesses",
+            load: "Poids total légal 150 kg; vélo 29 kg selon manuel",
+            options: ["Porte-bagage normal 25 kg", "Porte-bagage long 80 kg", "Selle Ezone ou Respiro", "Tige NCX", "Tige télescopique"],
+            pdfs: [
+              { label: "Brochure Classy 25", href: "brochures/Miloo_Brochure_FR_Classy_25pdf_compressed.pdf" },
+              { label: "Manuel Classy", href: "brochures/ClassyBeast_Manual_fr.pdf" }
+            ]
+          },
+          "45": {
+            label: "45 km/h",
+            price: "CHF 4'999",
+            motor: "Bafang 750 W nominal, 1'250 W pointe, 85 Nm",
+            battery: "Cadre 672 Wh; batterie arrière 672 Wh optionnelle",
+            range: "30-50 km par batterie; 60-100 km avec double batterie",
+            brakes: "Tektro hydrauliques, huile minérale, double pistons",
+            wheels: "Schwalbe Green Marathon 27.5 x 2.35",
+            transmission: "SRAM 8 vitesses, capteur de couple",
+            load: "Non précisé dans la brochure 45",
+            options: ["Batterie arrière 672 Wh", "Selle Ezone ou Respiro", "Tige NCX", "Tige télescopique"],
+            pdfs: [
+              { label: "Brochure Classy 45", href: "brochures/brochure_classy45_FR_compressed.pdf" },
+              { label: "Manuel Classy", href: "brochures/ClassyBeast_Manual_fr.pdf" }
+            ]
+          }
+        },
+        notes: "La brochure 25 mentionne le porte-bagage normal 25 kg et long 80 kg; le manuel fournit les données de poids Classy 25."
+      },
+      {
+        id: "cargo",
+        name: "Cargo Beast",
+        category: "Transport familial et utilitaire",
+        use: "Enfants, courses, poussette, remplacement voiture",
+        description: "Cargo électrique conçu pour remplacer une voiture sur les trajets quotidiens, avec capacité de charge élevée et porte-bagage long.",
+        tags: ["Cargo", "200 kg", "Famille", "Bafang"],
+        pitches: [
+          "Argument central: transporter deux enfants, des courses et meme une poussette.",
+          "Poids total en charge de 200 kg, facile a transformer en alternative voiture.",
+          "La version 45 km/h sert les familles ou pros qui doivent couvrir plus de distance."
+        ],
+        variants: {
+          "25": {
+            label: "25 km/h",
+            price: "CHF 4'499",
+            motor: "Bafang 500 W nominal, 950 W pointe, 85 Nm",
+            battery: "48 V x 14 Ah, 672 Wh, amovible, Samsung",
+            range: "80 km pour Cargo 25",
+            brakes: "Disques hydrauliques, quatre pistons",
+            wheels: "24 x 3 Kenda tout terrain",
+            transmission: "SRAM 8 vitesses, garde-chaine",
+            load: "Porte-bagage long 80 kg; poids total soutenu 200 kg",
+            options: ["Protections laterales", "Fourche telescopique", "Selle Ezone ou Respiro", "Tige NCX", "Tige télescopique"],
+            pdfs: [
+              { label: "Brochure Cargo 25/45", href: "brochures/brochure_cargo25_cargo45_FR.pdf" },
+              { label: "Manuel Cargo", href: "brochures/Cargo_Beast_Manual.pdf" }
+            ]
+          },
+          "45": {
+            label: "45 km/h",
+            price: "CHF 4'499+",
+            motor: "Bafang 750 W nominal, 1'250 W pointe, 85 Nm",
+            battery: "48 V x 14 Ah, 672 Wh; 2e batterie possible",
+            range: "40 km pour Cargo 45; extensible avec 2e batterie",
+            brakes: "Disques hydrauliques, quatre pistons",
+            wheels: "24 x 3 Kenda tout terrain",
+            transmission: "SRAM 8 vitesses, garde-chaine",
+            load: "Porte-bagage long 80 kg; poids total soutenu 200 kg",
+            options: ["Deuxieme batterie", "Protections laterales", "Fourche telescopique", "Selle Ezone ou Respiro", "Tige NCX", "Tige télescopique"],
+            pdfs: [
+              { label: "Brochure Cargo 25/45", href: "brochures/brochure_cargo25_cargo45_FR.pdf" },
+              { label: "Manuel Cargo", href: "brochures/Cargo_Beast_Manual.pdf" }
+            ]
+          }
+        },
+        notes: "La brochure donne un prix a partir de CHF 4'499 pour la famille Cargo, sans detail separe par vitesse."
+      },
+      {
+        id: "adventure",
+        name: "Adventure Beast",
+        category: "Speed pedelec carbone leger",
+        use: "Pendulaire sportif, performance, route rapide",
+        description: "Speed pedelec carbone developpe autour de la legerete et de la performance, presente comme l'un des plus legers et innovants du marche.",
+        tags: ["Carbone T700", "Miloo X line", "100 Nm", "Marco Odermatt"],
+        pitches: [
+          "A positionner comme machine premium de deplacement quotidien rapide.",
+          "Cadre carbone japonais et connectivite Smart Bluetooth pour un client sensible a la technologie.",
+          "Tres bon pont entre velo sportif et vraie solution de mobilite rapide."
+        ],
+        variants: {
+          "25": {
+            label: "25 km/h",
+            price: "CHF 7'999",
+            motor: "Miloo X line central, 250 W nominal, 800 W pointe, 100 Nm",
+            battery: "Batterie de cadre 708 Wh; option 808 Wh",
+            range: "125 km selon brochure; jusqu'a 80 km selon manuel",
+            brakes: "TRP 4 pistons G2, disque 180 mm, 2.3 mm",
+            wheels: "Schwalbe Hurricane 27.5 x 2.4",
+            transmission: "SRAM NX Eagle 12 vitesses",
+            load: "Charge totale 140 kg; poids 16-21 kg selon versions",
+            options: ["Jantes carbone", "AXS Eagle Wireless", "Enviolo Xtreme Automatiq", "Fourche telescopique", "Clignotants", "Batterie 808 Wh", "Selle telescopique sans fil AXS XPLR"],
+            pdfs: [
+              { label: "Brochure Adventure", href: "brochures/brochure_adventure_fr.pdf" },
+              { label: "Manuel Adventure", href: "brochures/AdventureBeast_Manual_fr.pdf" }
+            ]
+          },
+          "45": {
+            label: "45 km/h",
+            price: "CHF 7'999",
+            motor: "Miloo X line central, 250 W nominal, 800 W pointe, 100 Nm",
+            battery: "Batterie de cadre 708 Wh; option 808 Wh",
+            range: "125 km selon brochure; jusqu'a 80 km selon manuel",
+            brakes: "TRP 4 pistons G2, disque 180 mm, 2.3 mm",
+            wheels: "Schwalbe Hurricane 27.5 x 2.4",
+            transmission: "SRAM NX Eagle 12 vitesses",
+            load: "Charge totale 140 kg; poids 16-21 kg selon versions",
+            options: ["Jantes carbone", "AXS Eagle Wireless", "Enviolo Xtreme Automatiq", "Fourche telescopique", "Clignotants", "Batterie 808 Wh", "Selle telescopique sans fil AXS XPLR"],
+            pdfs: [
+              { label: "Brochure Adventure", href: "brochures/brochure_adventure_fr.pdf" },
+              { label: "Manuel Adventure", href: "brochures/AdventureBeast_Manual_fr.pdf" }
+            ]
+          }
+        },
+        notes: "La brochure liste les categories 25 km/h et 45 km/h avec les memes specs principales; verifier la configuration commerciale exacte avant devis."
+      },
+      {
+        id: "maverick",
+        name: "Maverick Beast",
+        category: "Performance carbone tout-suspendu",
+        use: "Sport, montagne, entrainement, premium",
+        description: "Nouvelle generation performance avec cadre carbone japonais, moteur Miloo X line et suspension, presente comme tres leger dans sa categorie de puissance.",
+        tags: ["Carbone T700", "Tout suspendu", "60-180 km", "120 Nm option"],
+        pitches: [
+          "Pour le client qui veut la performance Miloo la plus sportive, sans aller jusqu'a l'Xplorer.",
+          "Autonomie annoncee large, cadre carbone et suspensions pour usage dynamique.",
+          "Options moteur, transmission et batterie permettent une configuration tres haut de gamme."
+        ],
+        variants: {
+          "25": {
+            label: "25 km/h",
+            price: "CHF 7'699",
+            motor: "Miloo X line central, 250 W nominal, 750 W pointe, 100 Nm; option 850 W / 120 Nm",
+            battery: "Batterie de cadre 807 Wh; option 804 Wh; 2e batterie 360 Wh",
+            range: "60-180 km",
+            brakes: "TRP 4 pistons G2, disque 180 mm, 2.3 mm",
+            wheels: "Johnny Watts / Schwalbe Hurricane 27.5 x 2.8",
+            transmission: "Eagle 90, 12 vitesses",
+            load: "Taille cycliste 170-188 cm; charge non precisee",
+            options: ["Jantes carbone", "AXS Eagle Wireless", "Enviolo Xtreme Automatiq", "Deuxieme batterie 360 Wh", "Selle telescopique sans fil", "Boost", "Moteur 850 W / 120 Nm"],
+            pdfs: [
+              { label: "Brochure Maverick", href: "brochures/brochure_maverick_fr.pdf" },
+              { label: "Manuel Maverick", href: "brochures/MaverickBeast_Manual_1.pdf" }
+            ]
+          },
+          "45": {
+            label: "45 km/h",
+            price: "CHF 7'699+",
+            motor: "Miloo X line central, 250 W nominal, 750 W pointe, 100 Nm; option 850 W / 120 Nm",
+            battery: "Batterie de cadre 807 Wh; option 804 Wh; 2e batterie 360 Wh",
+            range: "60-180 km",
+            brakes: "TRP 4 pistons G2, disque 180 mm, 2.3 mm",
+            wheels: "Johnny Watts / Schwalbe Hurricane 27.5 x 2.8",
+            transmission: "Eagle 90, 12 vitesses",
+            load: "Taille cycliste 170-188 cm; charge non precisee",
+            options: ["Jantes carbone", "AXS Eagle Wireless", "Enviolo Xtreme Automatiq", "Deuxieme batterie 360 Wh", "Selle telescopique sans fil", "Boost", "Moteur 850 W / 120 Nm"],
+            pdfs: [
+              { label: "Brochure Maverick", href: "brochures/brochure_maverick_fr.pdf" },
+              { label: "Manuel Maverick", href: "brochures/MaverickBeast_Manual_1.pdf" }
+            ]
+          }
+        },
+        notes: "Le prix brochure est indique explicitement pour 25 km/h; la brochure mentionne aussi les categories 25 et 45 km/h."
+      },
+      {
+        id: "xplorer",
+        name: "Xplorer Beast",
+        category: "E-SUV bike extreme",
+        use: "Montagne, froid, neige, expeditions, puissance maximale",
+        description: "E-SUV bike tres puissant et polyvalent, concu pour les trajets urbains difficiles comme pour les usages sportifs en montagne.",
+        tags: ["45 km/h", "1'250 W", "200 Nm pointe", "1'008 Wh"],
+        pitches: [
+          "Le choix le plus extreme de la gamme: puissance, couple et batterie massive.",
+          "A presenter aux clients qui veulent rouler toute l'annee, y compris froid, neige et pentes ardues.",
+          "Connectivite complete avec alarme, verrouillage moteur et reglages a distance."
+        ],
+        variants: {
+          "45": {
+            label: "45 km/h",
+            price: "CHF 9'999",
+            motor: "Miloo X line central base M620, 1'000 W nominal, 1'250 W pointe, 160 Nm max, 200 Nm pointe",
+            battery: "48 V x 21 Ah, 1'008 Wh; batterie optionnelle 672 Wh",
+            range: "Non precisee dans la brochure; grande autonomie via 1'008 Wh + option 672 Wh",
+            brakes: "Miloo X line 4 pistons, 203 mm, hydraulique; ABS optionnel",
+            wheels: "Johnny Watts 27.5 x 2.8, jantes aluminium 6069",
+            transmission: "SRAM NX Eagle 11 vitesses",
+            load: "Taille conducteur 170-188 cm; charge non precisee dans brochure",
+            options: ["ABS", "Batterie supplementaire 672 Wh", "Suivi GPS", "Porte-bagages carbone avec clignotants", "Connectivite Bluetooth 5"],
+            pdfs: [
+              { label: "Brochure Xplorer", href: "brochures/brochure_xplorer_fr_1.pdf" },
+              { label: "Manuel Xplorer", href: "brochures/Xplorer_Manual_fr.pdf" }
+            ]
+          }
+        },
+        notes: "Categorie 45 km/h uniquement dans la brochure Xplorer."
+      },
+      {
+        id: "nespresso",
+        name: "Classy Infinite by Nespresso",
+        category: "S-Pedelec circulaire",
+        use: "Mobilite douce premium, style, eco-conception",
+        description: "S-Pedelec 45 km/h circulaire inspire des capsules Nespresso Vertuo, associant style, securite, connectivite et materiaux recycles.",
+        tags: ["45 km/h", "Materiaux recycles", "140 Nm", "Bluetooth 5"],
+        pitches: [
+          "Produit parfait pour un client sensible au style, a l'impact carbone et a l'histoire Nespresso.",
+          "Cadre et jantes issus d'aluminium provenant de 1'344 capsules recyclees.",
+          "Options securitaires fortes: ABS, clignotants, boost, deuxieme batterie et suivi GPS."
+        ],
+        variants: {
+          "45": {
+            label: "45 km/h",
+            price: "CHF 5'999",
+            motor: "Miloo X line base M580, 500 W nominal, jusqu'a 1'500 W pointe, 140 Nm",
+            battery: "48 V x 14 Ah, 672 Wh; batterie arriere optionnelle 672 Wh",
+            range: "Minimum 80 km",
+            brakes: "Miloo X 4 pistons, 203 mm, hydraulique; ABS optionnel",
+            wheels: "Schwalbe Green Marathon 27.5 x 2.35",
+            transmission: "SRAM X4 8 vitesses; Enviolo Automatiq Extreme optionnel",
+            load: "Porte-bagage traditionnel 25 kg; option MIK avec clignotants et batterie",
+            options: ["Enviolo Automatiq Extreme", "ABS", "Clignotants au guidon", "Batterie arriere 672 Wh", "Suivi GPS", "Tige NCX", "Tige telescopique"],
+            pdfs: [{ label: "Brochure Classy Infinite by Nespresso", href: "brochures/nespresso_brochure_45_fr.pdf" }]
+          }
+        },
+        notes: "La brochure indique 87 % de CO2 economises grace a la production et plusieurs composants recycles."
+      }
+    ];
+
+    const state = {
+      bikeId: bikes[0].id,
+      speed: Object.keys(bikes[0].variants)[0],
+      query: ""
+    };
+
+    const familyGrid = document.querySelector("#familyGrid");
+    const variantTabs = document.querySelector("#variantTabs");
+    const search = document.querySelector("#search");
+
+    function normalize(text) {
+      return String(text).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
+
+    function bikeSearchText(bike) {
+      return [
+        bike.name, bike.category, bike.use, bike.description, bike.tags.join(" "),
+        bike.pitches.join(" "), bike.notes,
+        Object.values(bike.variants).map(v => [
+          v.label, v.price, v.motor, v.battery, v.range, v.brakes, v.wheels, v.transmission, v.load, v.options.join(" ")
+        ].join(" ")).join(" ")
+      ].join(" ");
+    }
+
+    function filteredBikes() {
+      const q = normalize(state.query.trim());
+      if (!q) return bikes;
+      return bikes.filter(bike => normalize(bikeSearchText(bike)).includes(q));
+    }
+
+    function selectedBike() {
+      return bikes.find(bike => bike.id === state.bikeId) || bikes[0];
+    }
+
+    function selectedVariant(bike) {
+      if (!bike.variants[state.speed]) {
+        state.speed = Object.keys(bike.variants)[0];
+      }
+      return bike.variants[state.speed];
+    }
+
+    function renderFamilies() {
+      const visible = filteredBikes();
+      familyGrid.innerHTML = "";
+
+      visible.forEach(bike => {
+        const button = document.createElement("button");
+        button.className = "family-button" + (bike.id === state.bikeId ? " active" : "");
+        button.type = "button";
+        button.innerHTML = `
+          <span>
+            <span class="family-name">${bike.name}</span>
+            <span class="family-use">${bike.use}</span>
+          </span>
+          <span class="speed-pills">${Object.keys(bike.variants).map(speed => `<span class="pill">${speed}</span>`).join("")}</span>
+        `;
+        button.addEventListener("click", () => {
+          state.bikeId = bike.id;
+          state.speed = Object.keys(bike.variants)[0];
+          render();
+        });
+        familyGrid.appendChild(button);
+      });
+
+      if (!visible.some(bike => bike.id === state.bikeId) && visible[0]) {
+        state.bikeId = visible[0].id;
+        state.speed = Object.keys(visible[0].variants)[0];
+      }
+    }
+
+    function renderVariants(bike) {
+      variantTabs.innerHTML = "";
+      Object.entries(bike.variants).forEach(([speed, variant]) => {
+        const button = document.createElement("button");
+        button.className = "variant-tab" + (speed === state.speed ? " active" : "");
+        button.type = "button";
+        button.textContent = variant.label;
+        button.addEventListener("click", () => {
+          state.speed = speed;
+          render();
+        });
+        variantTabs.appendChild(button);
+      });
+    }
+
+    function spec(label, value) {
+      return `
+        <div class="spec">
+          <span class="spec-label">${label}</span>
+          <span class="spec-value">${value}</span>
+        </div>
+      `;
+    }
+
+    function renderCompare(bike) {
+      const speeds = Object.keys(bike.variants);
+      if (speeds.length < 2) {
+        return `<p class="source-note">Une seule variante documentee dans les brochures locales: ${bike.variants[speeds[0]].label}.</p>`;
+      }
+
+      const rows = [
+        ["Prix", "price"],
+        ["Moteur", "motor"],
+        ["Batterie", "battery"],
+        ["Autonomie", "range"],
+        ["Transmission", "transmission"]
+      ];
+
+      return `
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Critere</th>
+              ${speeds.map(speed => `<th>${bike.variants[speed].label}</th>`).join("")}
+            </tr>
+          </thead>
+          <tbody>
+            ${rows.map(([label, key]) => `
+              <tr>
+                <td><strong>${label}</strong></td>
+                ${speeds.map(speed => `<td>${bike.variants[speed][key]}</td>`).join("")}
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      `;
+    }
+
+    function renderDetail() {
+      const bike = selectedBike();
+      const variant = selectedVariant(bike);
+
+      document.querySelector("#category").textContent = bike.category;
+      document.querySelector("#title").textContent = bike.name;
+      document.querySelector("#description").textContent = bike.description;
+      document.querySelector("#price").textContent = variant.price;
+      document.querySelector("#tags").innerHTML = bike.tags.map(tag => `<span class="tag">${tag}</span>`).join("");
+      document.querySelector("#pitch").innerHTML = bike.pitches.map(item => `<li>${item}</li>`).join("");
+      document.querySelector("#specs").innerHTML = [
+        spec("Moteur", variant.motor),
+        spec("Batterie", variant.battery),
+        spec("Autonomie", variant.range),
+        spec("Freins", variant.brakes),
+        spec("Roues", variant.wheels),
+        spec("Transmission", variant.transmission),
+        spec("Charge / poids", variant.load),
+        spec("Vitesse", variant.label)
+      ].join("");
+      document.querySelector("#compare").innerHTML = renderCompare(bike);
+      document.querySelector("#options").innerHTML = variant.options.map(item => `<li>${item}</li>`).join("");
+      document.querySelector("#pdfs").innerHTML = variant.pdfs.map(pdf => `
+        <li><a href="${pdf.href}" target="_blank" rel="noopener"><span>${pdf.label}</span><span aria-hidden="true">PDF</span></a></li>
+      `).join("");
+      document.querySelector("#notes").textContent = bike.notes + " Source complementaire back-office non trouvee dans ce dossier; les prix et specs affiches proviennent des PDF locaux.";
+
+      renderVariants(bike);
+      document.title = `${bike.name} ${variant.label} - Miloo`;
+    }
+
+    function render() {
+      renderFamilies();
+      renderDetail();
+    }
+
+    search.addEventListener("input", event => {
+      state.query = event.target.value;
+      render();
+    });
+
+    render();
+  </script>
+</body>
+</html>
