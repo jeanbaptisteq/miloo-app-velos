@@ -8,17 +8,17 @@
   <style>
     :root {
       color-scheme: light;
-      --ink: #17201b;
-      --muted: #5c6760;
-      --line: #d9ded8;
+      --ink: #0C1822;
+      --muted: #5f666a;
+      --line: #dde1e3;
       --panel: #ffffff;
-      --page: #f5f6f2;
-      --brand: #1d6f5f;
-      --brand-dark: #124f45;
-      --accent: #c7482d;
-      --gold: #b28a35;
-      --blue: #245d8f;
-      --shadow: 0 14px 34px rgba(23, 32, 27, .11);
+      --page: #f6f7f6;
+      --brand: #EE3831;
+      --brand-dark: #0C1822;
+      --accent: #EE3831;
+      --gold: #EE3831;
+      --blue: #0C1822;
+      --shadow: 0 14px 34px rgba(12, 24, 34, .10);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
@@ -45,7 +45,7 @@
       position: sticky;
       top: 0;
       z-index: 10;
-      background: rgba(245, 246, 242, .94);
+      background: rgba(246, 247, 246, .94);
       border-bottom: 1px solid var(--line);
       backdrop-filter: blur(14px);
     }
@@ -68,15 +68,9 @@
     }
 
     .logo {
-      width: 46px;
-      height: 46px;
-      border-radius: 8px;
-      background: var(--ink);
-      color: #fff;
-      display: grid;
-      place-items: center;
-      font-weight: 850;
-      letter-spacing: 0;
+      display: block;
+      width: 116px;
+      height: auto;
       flex: 0 0 auto;
     }
 
@@ -112,7 +106,7 @@
 
     .search:focus {
       border-color: var(--brand);
-      box-shadow: 0 0 0 3px rgba(29, 111, 95, .14);
+      box-shadow: 0 0 0 3px rgba(238, 56, 49, .15);
     }
 
     main {
@@ -121,47 +115,39 @@
       padding: 18px;
       width: 100%;
       display: grid;
-      grid-template-columns: 320px 1fr;
-      gap: 18px;
+      gap: 14px;
     }
 
-    .rail {
-      display: grid;
-      gap: 12px;
-      align-content: start;
-    }
-
-    .visual {
-      overflow: hidden;
-      border-radius: 8px;
+    .product-visual {
+      width: 100%;
+      aspect-ratio: 16 / 9;
       border: 1px solid var(--line);
-      background: #dfe5dc;
-      min-height: 102px;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #f4f5f4;
     }
 
-    .visual img {
+    .product-visual img {
       display: block;
       width: 100%;
-      height: 116px;
-      object-fit: cover;
+      height: 100%;
+      object-fit: contain;
     }
 
     .family-grid {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 8px;
     }
 
     .family-button {
       border: 1px solid var(--line);
       background: var(--panel);
       border-radius: 8px;
-      min-height: 76px;
+      min-height: 46px;
       text-align: left;
-      padding: 12px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 10px;
+      padding: 11px 12px;
+      display: flex;
       align-items: center;
       cursor: pointer;
       color: var(--ink);
@@ -170,46 +156,18 @@
     .family-button:hover,
     .family-button.active {
       border-color: var(--brand);
-      box-shadow: 0 0 0 3px rgba(29, 111, 95, .12);
+      box-shadow: 0 0 0 3px rgba(238, 56, 49, .13);
     }
 
     .family-button.active {
-      background: #eef6f1;
+      background: #fff1f0;
     }
 
     .family-name {
       display: block;
-      font-size: 1rem;
+      font-size: .98rem;
       font-weight: 780;
-      line-height: 1.1;
-    }
-
-    .family-use {
-      display: block;
-      margin-top: 5px;
-      color: var(--muted);
-      font-size: .82rem;
-      line-height: 1.2;
-    }
-
-    .speed-pills {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: end;
-      gap: 5px;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      min-height: 28px;
-      border-radius: 999px;
-      padding: 5px 8px;
-      background: #e8ece7;
-      color: #2e3732;
-      font-size: .78rem;
-      font-weight: 760;
-      white-space: nowrap;
+      line-height: 1.15;
     }
 
     .detail {
@@ -221,7 +179,7 @@
 
     .hero {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-columns: minmax(0, .95fr) minmax(430px, .85fr);
       gap: 18px;
       align-items: stretch;
       background: var(--panel);
@@ -250,18 +208,18 @@
     .hero-copy {
       margin: 12px 0 0;
       max-width: 70ch;
-      color: #324039;
+      color: #26313a;
       font-size: clamp(1rem, 1.4vw, 1.18rem);
       line-height: 1.45;
     }
 
     .pricebox {
-      min-width: 220px;
       border-left: 1px solid var(--line);
       padding-left: 18px;
       display: grid;
-      gap: 10px;
+      gap: 12px;
       align-content: center;
+      min-width: 0;
     }
 
     .price {
@@ -275,6 +233,172 @@
     .tax {
       color: var(--muted);
       font-size: .85rem;
+    }
+
+    .payment-widget {
+      display: grid;
+      gap: 16px;
+      border-radius: 8px;
+      padding: 16px;
+      background: #f0f1ef;
+    }
+
+    .payment-widget-price {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--ink);
+      font-size: clamp(1.25rem, 2.2vw, 1.85rem);
+      font-weight: 880;
+      line-height: 1.2;
+    }
+
+    .payment-widget-info {
+      width: 22px;
+      height: 22px;
+      border: 2px solid #9a9f9b;
+      border-radius: 999px;
+      display: inline-grid;
+      place-items: center;
+      color: #707873;
+      font-size: .85rem;
+      font-weight: 850;
+      cursor: help;
+    }
+
+    .payment-slider {
+      display: grid;
+      gap: 7px;
+    }
+
+    .payment-slider-title {
+      margin: 0;
+      color: #9a9f9b;
+      text-align: center;
+      font-size: .82rem;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .payment-slider-track {
+      --fill: 0%;
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(var(--steps), 1fr);
+      min-height: 50px;
+      align-items: start;
+    }
+
+    .payment-slider-track::before,
+    .payment-slider-track::after {
+      content: "";
+      position: absolute;
+      left: calc(100% / var(--steps) / 2);
+      right: calc(100% / var(--steps) / 2);
+      top: 11px;
+      height: 4px;
+      border-radius: 999px;
+    }
+
+    .payment-slider-track::before {
+      background: #d4d7d3;
+    }
+
+    .payment-slider-track::after {
+      right: auto;
+      width: var(--fill);
+      max-width: calc(100% - (100% / var(--steps)));
+      background: #EE3831;
+    }
+
+    .payment-step {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 8px;
+      justify-items: center;
+      border: 0;
+      padding: 0;
+      background: transparent;
+      color: #9a9f9b;
+      font: inherit;
+      font-weight: 820;
+      cursor: pointer;
+    }
+
+    .payment-step::before {
+      content: "";
+      width: 20px;
+      height: 20px;
+      border: 3px solid #cfd3d0;
+      border-radius: 999px;
+      background: #f0f1ef;
+    }
+
+    .payment-step.active,
+    .payment-step.passed {
+      color: #EE3831;
+    }
+
+    .payment-step.active::before,
+    .payment-step.passed::before {
+      border-color: #EE3831;
+    }
+
+    .payment-step.active::before {
+      background: radial-gradient(circle, #EE3831 0 43%, #f0f1ef 46% 100%);
+    }
+
+    .payment-modes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 18px;
+      align-items: center;
+    }
+
+    .payment-mode {
+      min-height: 34px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 0;
+      background: transparent;
+      color: #26313a;
+      padding: 0;
+      font-size: .95rem;
+      cursor: pointer;
+    }
+
+    .payment-mode-box {
+      width: 24px;
+      height: 24px;
+      border: 2px solid #26313a;
+      border-radius: 4px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-weight: 860;
+      line-height: 1;
+    }
+
+    .payment-mode.active .payment-mode-box {
+      border-color: #EE3831;
+      background: #EE3831;
+    }
+
+    .payment-mode.active .payment-mode-box::before {
+      content: "✓";
+    }
+
+    .payment-mode-logo {
+      display: grid;
+      line-height: 1.05;
+    }
+
+    .payment-mode-logo strong {
+      color: #6a6f6c;
+      font-size: 1rem;
     }
 
     .variant-tabs {
@@ -302,10 +426,8 @@
     }
 
     .content-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.05fr) minmax(320px, .95fr);
-      gap: 14px;
-      align-items: start;
+      columns: 2 320px;
+      column-gap: 14px;
     }
 
     .section {
@@ -313,7 +435,11 @@
       border: 1px solid var(--line);
       border-radius: 8px;
       padding: 16px;
+      margin: 0 0 14px;
       min-width: 0;
+      break-inside: avoid;
+      display: inline-block;
+      width: 100%;
     }
 
     .section h3 {
@@ -323,7 +449,6 @@
       letter-spacing: 0;
     }
 
-    .pitch-list,
     .option-list,
     .pdf-list {
       display: grid;
@@ -333,15 +458,13 @@
       list-style: none;
     }
 
-    .pitch-list li,
     .option-list li {
       position: relative;
       padding-left: 18px;
       line-height: 1.38;
-      color: #2c3832;
+      color: #26313a;
     }
 
-    .pitch-list li::before,
     .option-list li::before {
       content: "";
       width: 7px;
@@ -407,6 +530,46 @@
       letter-spacing: .04em;
     }
 
+    .payment-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .payment-table-wrap {
+      overflow-x: auto;
+    }
+
+    .payment-table {
+      width: 100%;
+      min-width: 620px;
+      border-collapse: collapse;
+      font-size: .9rem;
+    }
+
+    .payment-table th,
+    .payment-table td {
+      border-bottom: 1px solid var(--line);
+      padding: 9px 8px;
+      text-align: left;
+      vertical-align: top;
+      line-height: 1.25;
+      white-space: nowrap;
+    }
+
+    .payment-table th {
+      color: var(--muted);
+      font-size: .76rem;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .payment-small {
+      margin: 0;
+      color: var(--muted);
+      font-size: .82rem;
+      line-height: 1.35;
+    }
+
     .pdf-list a {
       min-height: 46px;
       display: flex;
@@ -424,7 +587,7 @@
 
     .pdf-list a:hover {
       border-color: var(--brand);
-      background: #eef6f1;
+      background: #fff1f0;
     }
 
     .tag-row {
@@ -440,7 +603,7 @@
       align-items: center;
       border-radius: 999px;
       background: #ecf0ed;
-      color: #34413a;
+      color: #26313a;
       padding: 6px 10px;
       font-size: .83rem;
       font-weight: 720;
@@ -454,20 +617,8 @@
     }
 
     @media (max-width: 1080px) {
-      main {
-        grid-template-columns: 1fr;
-      }
-
-      .rail {
-        position: static;
-      }
-
       .family-grid {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-      }
-
-      .visual {
-        display: none;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       }
     }
 
@@ -509,10 +660,6 @@
         grid-template-columns: 1fr;
       }
 
-      .family-button {
-        min-height: 68px;
-      }
-
       .compare-table {
         font-size: .86rem;
       }
@@ -521,10 +668,11 @@
       .compare-table td {
         padding: 9px 5px;
       }
+
     }
 
     @media print {
-      header, .rail, .variant-tabs { display: none; }
+      header, .family-grid, .variant-tabs { display: none; }
       main, .content-grid, .hero { display: block; padding: 0; }
       .section, .hero { box-shadow: none; break-inside: avoid; margin-bottom: 12px; }
       body { background: #fff; }
@@ -536,11 +684,7 @@
     <header>
       <div class="topbar">
         <div class="brandline">
-          <div class="logo" aria-hidden="true">M</div>
-          <div>
-            <h1>Fiches vendeur Miloo</h1>
-            <p class="subtitle">7 familles, variantes 25/45 km/h, arguments, specs, accessoires et PDF sources.</p>
-          </div>
+          <img class="logo" src="logo-miloo-black.svg" alt="Miloo">
         </div>
         <div class="actions">
           <input class="search" id="search" type="search" placeholder="Rechercher usage, spec, prix..." autocomplete="off">
@@ -549,12 +693,7 @@
     </header>
 
     <main>
-      <aside class="rail" aria-label="Choix du vélo">
-        <div class="visual">
-          <img src="ChatGPT Image Jun 3, 2026, 11_31_10 AM.png" alt="">
-        </div>
-        <nav class="family-grid" id="familyGrid"></nav>
-      </aside>
+      <nav class="family-grid" id="familyGrid" aria-label="Choix du vélo"></nav>
 
       <section class="detail" aria-live="polite">
         <div class="hero">
@@ -569,16 +708,15 @@
               <div class="price" id="price"></div>
               <div class="tax">Prix TVA incluse, selon brochure disponible</div>
             </div>
+            <div class="payment-summary" id="paymentSummary"></div>
             <div class="variant-tabs" id="variantTabs"></div>
+            <div class="product-visual">
+              <img id="bikeImage" src="images_velos/mighty25_20401_16b5ee37-d73d-4b1b-89de-6d0baf09a072.webp" alt="">
+            </div>
           </div>
         </div>
 
         <div class="content-grid">
-          <div class="section">
-            <h3>Pitch client</h3>
-            <ul class="pitch-list" id="pitch"></ul>
-          </div>
-
           <div class="section">
             <h3>Specs clés</h3>
             <div class="specs" id="specs"></div>
@@ -587,6 +725,11 @@
           <div class="section">
             <h3>Comparer 25 vs 45</h3>
             <div id="compare"></div>
+          </div>
+
+          <div class="section">
+            <h3>Paiement leasing / financement</h3>
+            <div class="payment-grid" id="payment"></div>
           </div>
 
           <div class="section">
@@ -615,6 +758,7 @@
         name: "Mighty Beast",
         category: "Fat bike urbain puissant",
         use: "Rails de tram, ville exigeante, style affirmé",
+        image: "images_velos/mighty25_20401_16b5ee37-d73d-4b1b-89de-6d0baf09a072.webp",
         description: "Fat bike électrique stable et confortable, pensé pour dominer les irrégularités urbaines avec des pneus larges et une forte présence visuelle.",
         tags: ["Fat bike", "Bafang", "Pneus 26 x 4", "Samsung"],
         pitches: [
@@ -657,6 +801,7 @@
         name: "Classy Beast",
         category: "Confort urbain stable",
         use: "Ville, confort, porte-bagage, rails de tram",
+        image: "images_velos/bleubleu_classy25_ebike_76f2a896-00d9-47d2-bdd0-110fb78fec90.webp",
         description: "Vélo maniable, précis et confortable. Ses pneus larges protègent des irrégularités du terrain et réduisent le risque de coincer les roues dans les rails.",
         tags: ["Urbain", "Confort", "Porte-bagage", "Bafang"],
         pitches: [
@@ -705,6 +850,7 @@
         name: "Cargo Beast",
         category: "Transport familial et utilitaire",
         use: "Enfants, courses, poussette, remplacement voiture",
+        image: "images_velos/cargo_bike_grey_de24d4a7-9baf-46d5-8043-92dbd365e107.webp",
         description: "Cargo électrique conçu pour remplacer une voiture sur les trajets quotidiens, avec capacité de charge élevée et porte-bagage long.",
         tags: ["Cargo", "200 kg", "Famille", "Bafang"],
         pitches: [
@@ -756,6 +902,7 @@
         name: "Adventure Beast",
         category: "Speed pedelec carbone leger",
         use: "Pendulaire sportif, performance, route rapide",
+        image: "images_velos/grey_NXeagle_rigid.webp",
         description: "Speed pedelec carbone developpe autour de la legerete et de la performance, presente comme l'un des plus legers et innovants du marche.",
         tags: ["Carbone T700", "Miloo X line", "100 Nm", "Marco Odermatt"],
         pitches: [
@@ -804,6 +951,7 @@
         name: "Maverick Beast",
         category: "Performance carbone tout-suspendu",
         use: "Sport, montagne, entrainement, premium",
+        image: "images_velos/axs_grey_25.webp",
         description: "Nouvelle generation performance avec cadre carbone japonais, moteur Miloo X line et suspension, presente comme tres leger dans sa categorie de puissance.",
         tags: ["Carbone T700", "Tout suspendu", "60-180 km", "120 Nm option"],
         pitches: [
@@ -852,6 +1000,7 @@
         name: "Xplorer Beast",
         category: "E-SUV bike extreme",
         use: "Montagne, froid, neige, expeditions, puissance maximale",
+        image: "images_velos/xplorer_profile.webp",
         description: "E-SUV bike tres puissant et polyvalent, concu pour les trajets urbains difficiles comme pour les usages sportifs en montagne.",
         tags: ["45 km/h", "1'250 W", "200 Nm pointe", "1'008 Wh"],
         pitches: [
@@ -884,6 +1033,7 @@
         name: "Classy Infinite by Nespresso",
         category: "S-Pedelec circulaire",
         use: "Mobilite douce premium, style, eco-conception",
+        image: "images_velos/classy_infinite_nespresso_45.webp",
         description: "S-Pedelec 45 km/h circulaire inspire des capsules Nespresso Vertuo, associant style, securite, connectivite et materiaux recycles.",
         tags: ["45 km/h", "Materiaux recycles", "140 Nm", "Bluetooth 5"],
         pitches: [
@@ -910,9 +1060,51 @@
       }
     ];
 
+    const paymentInfo = {
+      financingTerms: [3, 6, 12, 24, 36],
+      leasingTerms: [6, 12, 18, 24, 30, 36, 42, 48],
+      vatRate: 1.081,
+      residualValueTtc: 540,
+      leasingAnnualRate: 0.046,
+      legalEffectiveRate: "4.7%",
+      insuranceShort: [
+        { maxPrice: 2000, monthly: 10.4 },
+        { maxPrice: 4000, monthly: 15.4 },
+        { maxPrice: 6000, monthly: 20.8 },
+        { maxPrice: 8000, monthly: 25.6 },
+        { maxPrice: 10000, monthly: 31.6 },
+        { maxPrice: 12000, monthly: 39.3 },
+        { maxPrice: 14000, monthly: 45.9 },
+        { maxPrice: 16000, monthly: 52.6 },
+        { maxPrice: 18000, monthly: 64.8 },
+        { maxPrice: 20000, monthly: 73.2 }
+      ],
+      insuranceLong: [
+        { maxPrice: 2000, monthly: 15.6 },
+        { maxPrice: 4000, monthly: 20.6 },
+        { maxPrice: 6000, monthly: 25.6 },
+        { maxPrice: 8000, monthly: 30.8 },
+        { maxPrice: 10000, monthly: 36 },
+        { maxPrice: 12000, monthly: 43 },
+        { maxPrice: 14000, monthly: 54.8 },
+        { maxPrice: 16000, monthly: 61.8 },
+        { maxPrice: 18000, monthly: 69.9 },
+        { maxPrice: 20000, monthly: 76.8 }
+      ],
+      sellerPoints: [
+        "Financement HeyLight: paiement en 3, 6, 12, 24 ou 36 mois, sans interet affiche sur le configurateur Miloo.",
+        "Leasing AMAG: 6 a 48 mois, acompte affiche CHF 0, assurance et garantie incluses pendant toute la duree du leasing.",
+        "Prestations leasing incluses: vol et casco monde entier, assistance depannage 24h/24 et mobilite de remplacement pendant les reparations.",
+        "Mention legale: l'octroi d'un credit est interdit s'il entraine le surendettement du consommateur; offre via revendeurs participants et AMAG Leasing AG, sous reserve de stock, modifications et erreurs."
+      ]
+    };
+
     const state = {
       bikeId: bikes[0].id,
       speed: Object.keys(bikes[0].variants)[0],
+      paymentMode: "leasing",
+      financingMonths: 6,
+      leasingMonths: 48,
       query: ""
     };
 
@@ -926,8 +1118,8 @@
 
     function bikeSearchText(bike) {
       return [
-        bike.name, bike.category, bike.use, bike.description, bike.tags.join(" "),
-        bike.pitches.join(" "), bike.notes,
+        bike.name, bike.category, bike.use, bike.image, bike.description, bike.tags.join(" "),
+        bike.pitches.join(" "), bike.notes, paymentInfo.sellerPoints.join(" "), "HeyLight AMAG leasing financement mensualite assurance garantie credit",
         Object.values(bike.variants).map(v => [
           v.label, v.price, v.motor, v.battery, v.range, v.brakes, v.wheels, v.transmission, v.load, v.options.join(" ")
         ].join(" ")).join(" ")
@@ -960,11 +1152,7 @@
         button.className = "family-button" + (bike.id === state.bikeId ? " active" : "");
         button.type = "button";
         button.innerHTML = `
-          <span>
-            <span class="family-name">${bike.name}</span>
-            <span class="family-use">${bike.use}</span>
-          </span>
-          <span class="speed-pills">${Object.keys(bike.variants).map(speed => `<span class="pill">${speed}</span>`).join("")}</span>
+          <span class="family-name">${bike.name}</span>
         `;
         button.addEventListener("click", () => {
           state.bikeId = bike.id;
@@ -1038,6 +1226,168 @@
       `;
     }
 
+    function priceToNumber(price) {
+      const cleaned = String(price).replace(/[^\d.,']/g, "").replace(/'/g, "").replace(",", ".");
+      const match = cleaned.match(/\d+(?:\.\d+)?/);
+      return match ? Number(match[0]) : 0;
+    }
+
+    function formatChf(value) {
+      return "CHF " + Number(value).toLocaleString("fr-CH", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
+
+    function insuranceMonthly(priceTtc, months) {
+      const table = months <= 24 ? paymentInfo.insuranceShort : paymentInfo.insuranceLong;
+      const row = table.find(item => priceTtc <= item.maxPrice) || table[table.length - 1];
+      return row.monthly;
+    }
+
+    function leasingMonthly(priceTtc, months) {
+      const priceHt = priceTtc / paymentInfo.vatRate;
+      const residualHt = paymentInfo.residualValueTtc / paymentInfo.vatRate;
+      const interest = (priceHt + residualHt) / 2 * (paymentInfo.leasingAnnualRate / 12);
+      const amortisation = (priceHt - residualHt) / months;
+      const leasingTtc = (interest + amortisation) * paymentInfo.vatRate;
+      return leasingTtc + insuranceMonthly(priceTtc, months);
+    }
+
+    function renderPayment(variant) {
+      const price = priceToNumber(variant.price);
+      if (!price) {
+        return `<p class="source-note">Prix insuffisant pour calculer les mensualites.</p>`;
+      }
+
+      const financingRows = paymentInfo.financingTerms.map(months => ({
+        months,
+        monthly: price / months,
+        total: price
+      }));
+      const leasingRows = paymentInfo.leasingTerms.map(months => ({
+        months,
+        monthly: leasingMonthly(price, months),
+        insurance: insuranceMonthly(price, months)
+      }));
+      const leasing48 = leasingRows.find(row => row.months === 48);
+
+      return `
+        <div class="payment-table-wrap">
+          <table class="payment-table">
+            <thead>
+              <tr>
+                <th>Duree</th>
+                <th>Financement HeyLight</th>
+                <th>Total finance</th>
+                <th>Leasing AMAG</th>
+                <th>Assurance incluse</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${paymentInfo.leasingTerms.map(months => {
+                const financing = financingRows.find(row => row.months === months);
+                const leasing = leasingRows.find(row => row.months === months);
+                return `
+                  <tr>
+                    <td>${months} mois</td>
+                    <td>${financing ? formatChf(financing.monthly) + " / mois" : "-"}</td>
+                    <td>${financing ? formatChf(financing.total) : "-"}</td>
+                    <td>${formatChf(leasing.monthly)} / mois</td>
+                    <td>${formatChf(leasing.insurance)} / mois</td>
+                  </tr>
+                `;
+              }).join("")}
+            </tbody>
+          </table>
+        </div>
+        <ul class="option-list">
+          ${paymentInfo.sellerPoints.map(point => `<li>${point}</li>`).join("")}
+        </ul>
+        <p class="payment-small">Calcul AMAG repris du script public Miloo: TVA 8.1%, valeur residuelle CHF 540 TTC, taux de calcul 4.6% annuel; exemple legal Miloo affiche un taux annuel effectif ${paymentInfo.legalEffectiveRate}. Exemple 48 mois pour ce prix: ${formatChf(leasing48.monthly)} / mois.</p>
+      `;
+    }
+
+    function renderPaymentSummary(variant) {
+      const price = priceToNumber(variant.price);
+      if (!price) return "";
+      const isFinancing = state.paymentMode === "financing";
+      const isLeasing = state.paymentMode === "leasing";
+      const hasSlider = isFinancing || isLeasing;
+      const terms = isFinancing ? paymentInfo.financingTerms : paymentInfo.leasingTerms;
+      const currentMonths = isFinancing ? state.financingMonths : state.leasingMonths;
+      const currentIndex = hasSlider ? Math.max(0, terms.indexOf(currentMonths)) : 0;
+      const fill = hasSlider && terms.length > 1 ? currentIndex / (terms.length - 1) * 100 : 0;
+      const amount = state.paymentMode === "default"
+        ? price
+        : isFinancing
+          ? price / state.financingMonths
+          : leasingMonthly(price, state.leasingMonths);
+      const label = state.paymentMode === "default" ? variant.price : `${formatChf(amount)} / mois`;
+      const title = isFinancing ? "MOIS - FINANCEMENT" : "MOIS - LEASING";
+      const tooltip = isLeasing
+        ? "Leasing AMAG: assurance, assistance, mobilite de remplacement et garantie incluses. Exemple sans acompte."
+        : isFinancing
+          ? "Financement HeyLight: paiement sans interet affiche par Miloo."
+          : "Paiement comptant du produit.";
+
+      return `
+        <div class="payment-widget">
+          <div class="payment-widget-price">
+            <span>${label}</span>
+            <span class="payment-widget-info" title="${tooltip}">i</span>
+          </div>
+          ${hasSlider ? `
+            <div class="payment-slider">
+              <p class="payment-slider-title">${title}</p>
+              <div class="payment-slider-track" style="--steps: ${terms.length}; --fill: ${fill}%;">
+                ${terms.map((months, index) => `
+                  <button class="payment-step${index === currentIndex ? " active" : ""}${index < currentIndex ? " passed" : ""}" type="button" data-payment-months="${months}" aria-label="${months} mois">
+                    <span>${months}</span>
+                  </button>
+                `).join("")}
+              </div>
+            </div>
+          ` : ""}
+          <div class="payment-modes" aria-label="Mode de paiement">
+            <button class="payment-mode${state.paymentMode === "default" ? " active" : ""}" type="button" data-payment-mode="default">
+              <span class="payment-mode-box"></span>
+              <span>Buy Product</span>
+            </button>
+            <button class="payment-mode${state.paymentMode === "financing" ? " active" : ""}" type="button" data-payment-mode="financing">
+              <span class="payment-mode-box"></span>
+              <span>Financing</span>
+            </button>
+            <button class="payment-mode${state.paymentMode === "leasing" ? " active" : ""}" type="button" data-payment-mode="leasing">
+              <span class="payment-mode-box"></span>
+              <span class="payment-mode-logo"><strong>amag</strong><span>Leasing</span></span>
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function bindPaymentSummary() {
+      document.querySelectorAll("[data-payment-mode]").forEach(button => {
+        button.addEventListener("click", () => {
+          state.paymentMode = button.dataset.paymentMode;
+          renderDetail();
+        });
+      });
+
+      document.querySelectorAll("[data-payment-months]").forEach(button => {
+        button.addEventListener("click", () => {
+          const months = Number(button.dataset.paymentMonths);
+          if (state.paymentMode === "financing") {
+            state.financingMonths = months;
+          } else {
+            state.leasingMonths = months;
+          }
+          renderDetail();
+        });
+      });
+    }
+
     function renderDetail() {
       const bike = selectedBike();
       const variant = selectedVariant(bike);
@@ -1045,9 +1395,12 @@
       document.querySelector("#category").textContent = bike.category;
       document.querySelector("#title").textContent = bike.name;
       document.querySelector("#description").textContent = bike.description;
+      document.querySelector("#bikeImage").src = bike.image;
+      document.querySelector("#bikeImage").alt = bike.name;
       document.querySelector("#price").textContent = variant.price;
+      document.querySelector("#paymentSummary").innerHTML = renderPaymentSummary(variant);
+      bindPaymentSummary();
       document.querySelector("#tags").innerHTML = bike.tags.map(tag => `<span class="tag">${tag}</span>`).join("");
-      document.querySelector("#pitch").innerHTML = bike.pitches.map(item => `<li>${item}</li>`).join("");
       document.querySelector("#specs").innerHTML = [
         spec("Moteur", variant.motor),
         spec("Batterie", variant.battery),
@@ -1059,6 +1412,7 @@
         spec("Vitesse", variant.label)
       ].join("");
       document.querySelector("#compare").innerHTML = renderCompare(bike);
+      document.querySelector("#payment").innerHTML = renderPayment(variant);
       document.querySelector("#options").innerHTML = variant.options.map(item => `<li>${item}</li>`).join("");
       document.querySelector("#pdfs").innerHTML = variant.pdfs.map(pdf => `
         <li><a href="${pdf.href}" target="_blank" rel="noopener"><span>${pdf.label}</span><span aria-hidden="true">PDF</span></a></li>
