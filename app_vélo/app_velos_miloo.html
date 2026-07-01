@@ -205,14 +205,6 @@
       letter-spacing: 0;
     }
 
-    .hero-copy {
-      margin: 12px 0 0;
-      max-width: 70ch;
-      color: #26313a;
-      font-size: clamp(1rem, 1.4vw, 1.18rem);
-      line-height: 1.45;
-    }
-
     .pricebox {
       border-left: 1px solid var(--line);
       padding-left: 18px;
@@ -590,25 +582,6 @@
       background: #fff1f0;
     }
 
-    .tag-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-      margin-top: 12px;
-    }
-
-    .tag {
-      display: inline-flex;
-      min-height: 30px;
-      align-items: center;
-      border-radius: 999px;
-      background: #ecf0ed;
-      color: #26313a;
-      padding: 6px 10px;
-      font-size: .83rem;
-      font-weight: 720;
-    }
-
     .source-note {
       margin: 0;
       color: var(--muted);
@@ -700,8 +673,9 @@
           <div>
             <p class="eyebrow" id="category"></p>
             <h2 id="title"></h2>
-            <p class="hero-copy" id="description"></p>
-            <div class="tag-row" id="tags"></div>
+            <div class="product-visual">
+              <img id="bikeImage" src="images_velos/mighty25_20401_16b5ee37-d73d-4b1b-89de-6d0baf09a072.webp" alt="">
+            </div>
           </div>
           <div class="pricebox">
             <div>
@@ -710,9 +684,6 @@
             </div>
             <div class="payment-summary" id="paymentSummary"></div>
             <div class="variant-tabs" id="variantTabs"></div>
-            <div class="product-visual">
-              <img id="bikeImage" src="images_velos/mighty25_20401_16b5ee37-d73d-4b1b-89de-6d0baf09a072.webp" alt="">
-            </div>
           </div>
         </div>
 
@@ -1394,13 +1365,11 @@
 
       document.querySelector("#category").textContent = bike.category;
       document.querySelector("#title").textContent = bike.name;
-      document.querySelector("#description").textContent = bike.description;
       document.querySelector("#bikeImage").src = bike.image;
       document.querySelector("#bikeImage").alt = bike.name;
       document.querySelector("#price").textContent = variant.price;
       document.querySelector("#paymentSummary").innerHTML = renderPaymentSummary(variant);
       bindPaymentSummary();
-      document.querySelector("#tags").innerHTML = bike.tags.map(tag => `<span class="tag">${tag}</span>`).join("");
       document.querySelector("#specs").innerHTML = [
         spec("Moteur", variant.motor),
         spec("Batterie", variant.battery),
